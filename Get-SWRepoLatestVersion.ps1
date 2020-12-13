@@ -35,7 +35,7 @@ $config = (Get-Content -LiteralPath $ConfigFile -Raw | ConvertFrom-Json).product
 # class to describe results
 class resultData {
     [string]$product
-    [string]$version
+    [version]$version
     [string]$osType
     [string]$platform
 }
@@ -50,12 +50,16 @@ function Get-HighestVersionFromPage {
     $pageData = Invoke-WebRequest -Uri $product.url -UseBasicParsing
     
     # Use regex with a name capture group to pull valid versions from the page
-    $versions = (($pageData.Content |
-                    Select-String -Pattern $regex -AllMatches).Matches.Groups |
-                    where {$_.Name -match 'version' -and $_.Value -ne ''}).Value
+    [version[]]$versions = (($pageData.RawContent |
+                    Select-String -Pattern $product."regex_pattern" -AllMatches).Matches.Groups |
+                    Where-Object {$_.Name -match 'version' -and $_.Value -ne ''}).Value | Select-Object -Unique
     
     # Only return the highest version
-    ([version[]]$versions | sort asc | measure -Maximum).Maximum
+    if ($null -eq ($versions | Sort-Object ascending | Measure-Object -Maximum).Maximum) {
+        Write-Error "No versions for $($product.product_name) were found."
+    }
+
+    ($versions | Sort-Object ascending | Measure-Object -Maximum).Maximum
 }
 
 $results = @()
