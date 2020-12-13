@@ -1,0 +1,18 @@
+{
+	"products": [
+            {
+                "product_name": "minecraft_bedrock",
+                "url": "https://www.minecraft.net/en-us/download/server/bedrock",
+                "regex_pattern": "(?<version>\\d+(\\.\\d+)+)?.zip",
+                "platform": "windows",
+                "os-type": "server"
+            },
+            {
+                "product_name": "notepadpp",
+                "url": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases",
+                "regex_pattern": "\/notepad-plus-plus\/tree\/v(?<version>\\d+(\\.\\d+)+)",
+                "platform": "windows",
+                "os-type": "client"
+            }
+        ]
+}
