@@ -1,3 +1,28 @@
+<#
+.SYNOPSIS
+    A script to check for the latest version of software.
+.DESCRIPTION
+    This script will take a config file in JSON format, check the URLs defined in said file for the latest version
+    and return those results.
+.EXAMPLE
+    .\Get-SWRepoLatestVersion.ps1 -ConfigFile config.json
+.INPUTS
+    $ConfigFile - a json file in the format of the json file in the repo.
+.OUTPUTS
+    product           version    osType platform
+    -------           -------    ------ --------
+    minecraft_bedrock 1.16.200.2 server windows
+    notepadpp         7.9.1      client windows
+
+    As an example.
+
+.NOTES
+    Sadly you'll need to work out the regex needed to pull appropriate version numbers from the website.
+
+    Additionally, this script makes use of the 'version' type, therefore if the software you're checking doesn't
+    use correct versions (1.1.1.1, 1.1.1.0, 1.1 etc) it won't work.
+#>
+
 [CmdletBinding()]
 param (
     [Parameter(Mandatory)]
