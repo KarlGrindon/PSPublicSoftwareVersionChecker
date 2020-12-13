@@ -33,3 +33,4 @@ This is the type of OS, as in client, server, mobile etc. Any value will work he
 - JSON manipulation and validation. Allowing people to easily add items to the JSON array, without touching the JSON manually.
 - Logic to differentiate beteen different platforms when scraping. For example, we may want to get the latest version of software X for Mac OS only, where different platforms are on the same page. This can already be done techincally, depending on the regex match you choose.
 - Add some support for non-standard version numbers, as currently the script makes use of the 'version' type.
+- Perhaps it would be better turning this into a module, depending on the amount of scripts that may exist in the future.
